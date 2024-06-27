@@ -35,4 +35,4 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: lakihelppi/leadoo-mock:latest,lakihelppi/leadoo-mock:${{ steps.meta.outputs.tags }}
+          tags: lakihelppi/leadoo-mock:${{ steps.meta.outputs.tags }}
