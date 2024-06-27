@@ -1,13 +1,8 @@
 FROM node:20-alpine
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-
-RUN corepack enable
-
 WORKDIR /app
 
-RUN pnpm install -g @mockoon/cli@8.2.0
+RUN npm install -g @mockoon/cli@8.2.0
 COPY ./data.json ./data.json
 
 # Install curl for healthcheck and tzdata for timezone support.
