@@ -1,0 +1,159 @@
+{
+  "uuid": "25fbfad9-6616-4785-bfc7-6c0da32aead7",
+  "lastMigration": 32,
+  "name": "Leadoo",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3004,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "2f87dff4-fcf2-484d-b308-923cd7cb0184",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "v1/lead/:id",
+      "responses": [
+        {
+          "uuid": "0dcd9f94-6d8d-4601-9f8f-b64c55799d25",
+          "body": "{{{setVar '_bot' (oneOf (dataRaw 'leadooBots'))}}}\n\n{{setVar '_firstName' (faker 'person.firstName')}}\n{{setVar '_lastName' (faker 'person.lastName')}}\n{{setVar '_companyName' (faker 'company.name')}}\n{{setVar '_socialNetworks' (array 'google' 'facebook' 'instagram' 'linkedin')}}\n{{setVar '_past' (dateFormat (faker 'date.past') 'yyyy-MM-dd HH:mm:ss')}}\n{{setVar '_recent' (dateFormat (faker 'date.recent') 'yyyy-MM-dd HH:mm:ss')}}\n{{setVar '_date' (date @_past @_recent \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\")}}\n\n{\n  \"id\": {{urlParam 'id'}},\n  \"first_name\": \"{{@_firstName}}\",\n  \"last_name\": \"{{@_lastName}}\",\n  \"name\": \"{{@_firstName}} {{@_lastName}}\",\n  \"bot_category_id\": {{@_bot.id}},\n  \"bot_type\": \"chat\",\n  \"bot_category_name\": \"{{@_bot.category}}\",\n    \"bot_name\": \"{{@_bot.name}}\",\n  \"email\": \"{{lowercase @_firstName}}.{{lowercase @_lastName}}@{{lowercase (faker 'helpers.slugify' @_companyName)}}.fi\",\n  \"phone\": \"{{faker 'phone.number'}}\",\n  \"company_name\": \"{{@_companyName}} Oy\",\n  \"location\": \"\",\n  \"address\": \"{{faker 'location.streetAddress'}}\",\n  \"country\": \"Finland\",\n  \"city\": \"{{faker 'location.city'}}\",\n  \"zip_code\": \"{{faker 'location.zipCode'}}\",\n  \"url\": \"{{faker 'internet.url'}}\",\n  \"score\": {{faker 'number.int' min=0 max=100}},\n\n  \"tags\": \"Label name 1, {{@_lastName}}, {{@_bot.category}}\",\n  \"details\": \"----- Lead Answers -----\\n1. Example Question - Example Answer\\n2. Yes/no? - yes\\n\",\n  \"details_json\": \"----- Lead Answers -----\\\\n1. Example Question - Example Answer\\\\n2. Yes/no? - yes\\\\n\",\n  \"created_at\": \"{{@_past}}\",\n  \"created_at_iso8601\": \"{{@_date}}\",\n  \"updated_at\": \"{{oneOf (array @_past @_recent)}}\",\n  \"attachments\": [],\n  \"lc_discussions\": [],\n  \"customer_profile_id\": null,\n  \"organization_profile_ids\": [],\n  \"utm_tags\": {\n    \"source\": \"string\",\n    \"medium\": \"string\",\n    \"campaign\": \"string\",\n    \"term\": \"string\",\n    \"content\": \"string\"\n  },\n  \"first_touch\": {\n    \"utm\": {\n      \"utm_source\": \"string\",\n      \"utm_campaign\": \"string\",\n      \"utm_content\": \"string\",\n      \"utm_medium\": \"string\",\n      \"utm_term\": \"string\"\n    },\n    \"referrer\": \"https://{{faker 'helpers.arrayElement' @_socialNetworks}}.com\"\n  },\n  \"last_touch\": {\n    \"utm\": {\n      \"utm_source\": \"string\",\n      \"utm_campaign\": \"string\",\n      \"utm_content\": \"string\",\n      \"utm_medium\": \"string\",\n      \"utm_term\": \"string\"\n    },\n    \"referrer\": \"https://{{faker 'helpers.arrayElement' @_socialNetworks}}.com/\"\n  },\n  \"first_touch_source\": \"{{faker 'helpers.arrayElement' @_socialNetworks}}\",\n  \"last_touch_source\": \"{{faker 'helpers.arrayElement' @_socialNetworks}}\",\n  \"var_example_variable_linkedin\": \"www.linkedin.com/in/test-{{urlParam 'id'}}\",\n  \"tag_example_label\": \"Label 1\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b5b88175-a09c-48fa-92cb-7ed08b3e7380",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "token",
+      "responses": [
+        {
+          "uuid": "6ec5f235-d2e5-44ed-a916-48b162230940",
+          "body": "{\n    \"access_token\": \"ShMgGA1b2qAkFArhMryX1swWL2fltb11boUWttRPOmEIma\",\n    \"expires_in\": 3600,\n    \"token_type\": \"Bearer\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e4859def-52f1-45af-a57e-e5a4ea8a2fbd",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "v1/lead",
+      "responses": [
+        {
+          "uuid": "8f5ceeb0-c115-49e4-9f5a-00847078557d",
+          "body": "{{setVar '_socialNetworks' (array 'google' 'facebook' 'instagram' 'linkedin')}}\n      \n{{setVar '_from' (dateFormat (queryParamRaw 'date_from') 'yyyy-MM-dd HH:mm:ss')}}\n{{setVar '_to' (dateFormat (queryParamRaw 'date_to') 'yyyy-MM-dd HH:mm:ss')}}\n\n{{setVar '_companyId' (concat (faker 'number.int' min=1111111 max=9999999) '-' (faker 'number.int' min=1 max=9))}}\n{{setVar '_total' (faker 'number.int' min=1 max=100)}}\n{{setVar '_start' (faker 'number.int' min=17111111 max=29999999)}}\n\n{\n  \"from\": \"{{@_from}}\",\n  \"to\": \"{{@_to}}\",\n  \"leads\": [\n    {{# repeat @_total }}\n      {{{setVar '_bot' (oneOf (dataRaw 'leadooBots'))}}}\n      \n      {{setVar '_firstName' (faker 'person.firstName')}}\n      {{setVar '_lastName' (faker 'person.lastName')}}\n      {{setVar '_companyName' (faker 'company.name')}}\n\n      {{setVar '_created' (date @_from @_to \"yyyy-MM-dd HH:mm:ss\")}}\n      {{setVar '_recent' (dateFormat (faker 'date.recent') 'yyyy-MM-dd HH:mm:ss')}}\n      \n      {\n        \"id\": {{add @_start @index}},\n        \"first_name\": \"{{@_firstName}}\",\n        \"last_name\": \"{{@_lastName}}\",\n        \"name\": \"{{@_firstName}} {{@_lastName}}\",\n        \"bot_category_id\": {{@_bot.id}},\n        \"bot_type\": \"chat\",\n        \"bot_category_name\": \"{{@_bot.category}}\",\n        \"bot_name\": \"{{@_bot.name}}\",\n        \"email\": \"{{lowercase @_firstName}}.{{lowercase @_lastName}}@{{lowercase (faker 'helpers.slugify' @_companyName)}}.fi\",\n        \"phone\": \"{{faker 'phone.number'}}\",\n        \"company_name\": \"{{@_companyName}} Oy\",\n        \"location\": \"\",\n        \"address\": \"{{faker 'location.streetAddress'}}\",\n        \"country\": \"Finland\",\n        \"city\": \"{{faker 'location.city'}}\",\n        \"zip_code\": \"{{faker 'location.zipCode'}}\",\n        \"url\": \"{{faker 'internet.url'}}\",\n        \"score\": {{faker 'number.int' min=0 max=100}},\n        \"tags\": \"Label name 1, {{@_lastName}}, {{@_bot.category}}\",\n        \"details\": \"----- Lead Answers -----\\n1. Example Question - Example Answer\\n2. Yes/no? - yes\\n3. Täyttäisitkö alle myös Y-tunnuksen? - {{@_companyId}} ()\\n\",\n        \"details_json\": \"----- Lead Answers -----\\\\n1. Example Question - Example Answer\\\\n2. Yes/no? - yes\\\\n3. Täyttäisitkö alle myös Y-tunnuksen? - {{@_companyId}} ()\\\\n\",\n        \"created_at\": \"{{@_created}}\",\n        \"created_at_iso8601\": \"{{dateFormat @_created \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n        \"updated_at\": \"{{oneOf (array @_created @_recent)}}\",\n        \"attachments\": [],\n        \"lc_discussions\": [],\n        \"customer_profile_id\": null,\n        \"organization_profile_ids\": [],\n        \"utm_tags\": {\n          \"source\": \"string\",\n          \"medium\": \"string\",\n          \"campaign\": \"string\",\n          \"term\": \"string\",\n          \"content\": \"string\"\n        },\n        \"first_touch\": {\n          \"utm\": {\n            \"utm_source\": \"string\",\n            \"utm_campaign\": \"string\",\n            \"utm_content\": \"string\",\n            \"utm_medium\": \"string\",\n            \"utm_term\": \"string\"\n          },\n          \"referrer\": \"https://{{faker 'helpers.arrayElement' @_socialNetworks}}.com\"\n        },\n        \"last_touch\": {\n          \"utm\": {\n            \"utm_source\": \"string\",\n            \"utm_campaign\": \"string\",\n            \"utm_content\": \"string\",\n            \"utm_medium\": \"string\",\n            \"utm_term\": \"string\"\n          },\n          \"referrer\": \"https://{{faker 'helpers.arrayElement' @_socialNetworks}}.com/\"\n        },\n        \"first_touch_source\": \"{{faker 'helpers.arrayElement' @_socialNetworks}}\",\n        \"last_touch_source\": \"{{faker 'helpers.arrayElement' @_socialNetworks}}\",\n        \"var_example_variable_linkedin\": \"www.linkedin.com/in/test-{{urlParam 'id'}}\",\n        \"tag_example_label\": \"Label 1\"\n      }\n    {{/ repeat }}\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "b5b88175-a09c-48fa-92cb-7ed08b3e7380"
+    },
+    {
+      "type": "route",
+      "uuid": "e4859def-52f1-45af-a57e-e5a4ea8a2fbd"
+    },
+    {
+      "type": "route",
+      "uuid": "2f87dff4-fcf2-484d-b308-923cd7cb0184"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "c7b8ba4b-36a4-4034-b0b1-0156e8409a8f",
+      "id": "qr2z",
+      "name": "leadooBots",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": 3453,\n    \"name\": \"Perukirja-botti\",\n    \"category\": \"Perintö\"\n  },\n  {\n    \"id\": 3454,\n    \"name\": \"Ositus tarjousbotti\",\n    \"category\": \"Perintö\"\n  },\n    {\n    \"id\": 3455,\n    \"name\": \"Tarjouspyyntö -botti\",\n    \"category\": \"Perintö\"\n  },\n      {\n    \"id\": 3456,\n    \"name\": \"8/3 Omaisuuden erottelu\",\n    \"category\": \"Perintö\"\n  },\n  {\n    \"id\": 3465,\n    \"name\": \"Lakichat muut kuin etusivu\",\n    \"category\": \"Lakichat\"\n  },\n  {\n    \"id\": 3475,\n    \"name\": \"8/8 Sopimus avioeron varalta\",\n    \"category\": \"Perhe\"\n  },\n  {\n    \"id\": 3121,\n    \"name\": \"Edunvalvontavaltuutus Uudet polut\",\n    \"category\": \"Muut asiakirjat\"\n  },\n  {\n    \"id\": 3122,\n    \"name\": \"Avioehto Uudet polut\",\n    \"category\": \"Muut asiakirjat\"\n  }\n]"
+    }
+  ],
+  "callbacks": []
+}
